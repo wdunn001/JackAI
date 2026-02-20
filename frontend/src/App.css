@@ -1,0 +1,38 @@
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, sans-serif; }
+
+.dashboard, .chat-page { max-width: 900px; margin: 0 auto; padding: 1rem; }
+.dashboard h1, .chat-page header h1 { margin-top: 0; }
+.subtitle { color: #666; }
+nav { margin: 1rem 0; }
+nav a { margin-right: 1rem; }
+.channel-overview ul { list-style: none; padding: 0; }
+.channel-overview li { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; border-bottom: 1px solid #eee; }
+.channel-overview li.connected .status { color: green; }
+.channel-overview li.disconnected .status { color: #999; }
+.channel-overview .name { font-weight: 600; min-width: 120px; }
+.channel-overview button { margin-left: auto; }
+.error { color: #c00; }
+
+.chat-layout { display: flex; gap: 1rem; margin-top: 1rem; }
+.channel-selector { flex: 0 0 220px; border-right: 1px solid #eee; padding-right: 1rem; }
+.channel-selector h3 { margin-top: 0; }
+.channel-selector ul { list-style: none; padding: 0; }
+.channel-selector li { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; }
+.channel-selector li.connected { color: green; }
+.channel-selector label { display: flex; align-items: center; gap: 0.25rem; flex: 1; }
+.channel-selector .widget-type { font-size: 0.85em; color: #666; }
+.chat-main { flex: 1; display: flex; flex-direction: column; min-height: 400px; }
+.message-list { flex: 1; overflow-y: auto; border: 1px solid #eee; border-radius: 8px; padding: 1rem; margin-bottom: 0.5rem; min-height: 200px; }
+.message { margin-bottom: 0.75rem; }
+.message .role { font-size: 0.75em; text-transform: uppercase; color: #666; margin-right: 0.5rem; }
+.message .channel-badge { font-size: 0.75em; background: #eee; padding: 0.1rem 0.4rem; border-radius: 4px; margin-right: 0.5rem; }
+.message.user .content { color: #06c; }
+.message-list .empty { color: #999; }
+.context-actions { margin-bottom: 0.5rem; padding: 0.5rem; background: #f8f8f8; border-radius: 8px; }
+.context-actions h4 { margin: 0 0 0.5rem 0; }
+.context-actions .clear-context, .context-actions .set-context { display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.5rem; }
+.context-actions input[type="text"] { flex: 1; min-width: 0; }
+.input-area { display: flex; gap: 0.5rem; }
+.input-area input { flex: 1; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; }
+.input-area button { padding: 0.5rem 1rem; }
