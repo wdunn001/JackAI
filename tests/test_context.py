@@ -2,12 +2,12 @@
 
 import pytest
 
-from jackai.context import (
+from jackai.core.context import (
     DEFAULT_INJECTION_PAYLOADS,
     get_default_strategy,
     get_injection_payloads,
 )
-from jackai.models.interface import ContextStrategy
+from jackai.core.models.interface import ContextStrategy
 
 
 class TestContextModule:

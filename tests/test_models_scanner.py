@@ -3,14 +3,14 @@
 import pytest
 from pydantic import ValidationError
 
-from jackai.models.config import WebWidgetSelectors
-from jackai.models.scanner import (
+from jackai.core.models.config import WebWidgetSelectors
+from jackai.core.models.scanner import (
     ContextWipeTestResult,
     IdentifiedInteraction,
     ScrapeInput,
     ScrapeResult,
 )
-from jackai.models.config import TargetConfig
+from jackai.core.models.config import TargetConfig
 
 
 @pytest.fixture

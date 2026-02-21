@@ -4,8 +4,8 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from jackai.models.config import WebWidgetSelectors
-from jackai.models.scanner import IdentifiedInteraction
+from jackai.core.models.config import WebWidgetSelectors
+from jackai.core.models.scanner import IdentifiedInteraction
 from jackai.scanner.identify import run_identify
 
 

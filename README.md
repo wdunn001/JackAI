@@ -9,12 +9,34 @@ PoC tool for testing **context-hijacking** of publicly exposed AIs (security res
 - **API**: FastAPI with `/api/targets`, `/api/scan/scrape`, `/api/scan/identify`, `/api/scan/test-wipe`, `/api/scan/full`, `/api/scan/save-target`.
 - **CLI**: `jackai scan scrape`, `jackai scan identify`, `jackai scan test-wipe`, `jackai scan full`, `jackai scan save-target`, `jackai serve`.
 
-## Setup
+## Quick start
+
+From the project root, run the API and frontend together. Scripts install Python deps (Poetry + packages), Playwright Chromium for the scanner, and frontend deps if missing.
+
+- **Windows (PowerShell):** `.\run.ps1`
+- **Bash / Git Bash:** `./run.sh`
+
+Then open the frontend URL shown (e.g. http://localhost:5173). Use the Scanner page to identify widgets; use Chat with configured targets.
+
+## Project layout
+
+- **jackai/core** — Models, adapters, session, context, config loader (library used by API, CLI, scanner).
+- **jackai/domain** — Domain layer: entities (e.g. `ScanRun`), repository interfaces (`TargetRepository`, `ScanHistoryRepository`). Storage-agnostic.
+- **jackai/infrastructure** — TinyDB-backed repositories; targets and scan history stored in `data/jackai.json` (override with `JACKAI_DB_PATH`).
+- **jackai/api** — FastAPI app and channel registry (REST routes for targets, channels, chat, scan). `jackai serve` runs this with uvicorn.
+- **jackai/cli** — Typer CLI: connect, send, clear-context, set-context, disconnect, and `scan *` commands.
+- **jackai/scanner** — Scanner pipeline: scrape, identify, test_context_wipe, adapter_factory, signatures.
+
+## Setup (manual)
+
+If you prefer not to use `run.sh` / `run.ps1`:
 
 ```bash
 poetry install
-poetry run playwright install chromium
+poetry run playwright install chromium   # required for scanner (identify / test-wipe)
 ```
+
+Node 18+ and npm are required for the frontend; the run scripts install frontend deps when needed.
 
 ## CLI
 

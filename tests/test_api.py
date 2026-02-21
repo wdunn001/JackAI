@@ -137,8 +137,13 @@ class TestScanFull:
 
 class TestScanSaveTarget:
     def test_save_target_accepts_config(self, tmp_path: Path) -> None:
-        config_dir = tmp_path / "targets"
-        with patch("jackai.api.app.get_targets_dir", return_value=config_dir):
+        from jackai.infrastructure.tinydb_repositories import TinyDBTargetRepository
+        db_path = tmp_path / "test.json"
+        repo = TinyDBTargetRepository(db_path)
+        with (
+            patch("jackai.core.config_loader.get_target_repository", return_value=repo),
+            patch("jackai.scanner.adapter_factory.get_target_repository", return_value=repo),
+        ):
             app = create_app()
             c = TestClient(app)
             body = {
@@ -155,6 +160,6 @@ class TestScanSaveTarget:
             r = c.post("/api/scan/save-target", json=body)
         assert r.status_code == 200
         data = r.json()
-        assert "saved" in data
+        assert data["saved"] == "test-save"
         assert "targets" in data
-        assert config_dir.exists()
+        assert any(t.get("name") == "test-save" for t in data["targets"])

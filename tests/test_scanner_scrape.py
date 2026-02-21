@@ -2,7 +2,7 @@
 
 import pytest
 
-from jackai.models.scanner import ScrapeInput, ScrapeResult
+from jackai.core.models.scanner import ScrapeInput, ScrapeResult
 from jackai.scanner.scrape import run_scrape
 
 

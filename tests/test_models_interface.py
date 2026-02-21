@@ -3,7 +3,7 @@
 import pytest
 from pydantic import ValidationError
 
-from jackai.models.interface import ContextStrategy, Message, Reply, SendRequest
+from jackai.core.models.interface import ContextStrategy, Message, Reply, SendRequest
 
 
 class TestMessage:

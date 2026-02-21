@@ -5,9 +5,9 @@ from pathlib import Path
 
 import pytest
 
-from jackai.models.config import TargetConfig, WebWidgetSelectors
-from jackai.models.interface import ContextStrategy, SendRequest
-from jackai.models.scanner import IdentifiedInteraction, ScrapeInput
+from jackai.core.models.config import TargetConfig, WebWidgetSelectors
+from jackai.core.models.interface import ContextStrategy, SendRequest
+from jackai.core.models.scanner import IdentifiedInteraction, ScrapeInput
 
 
 @pytest.fixture

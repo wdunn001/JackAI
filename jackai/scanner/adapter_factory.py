@@ -6,8 +6,8 @@ from urllib.parse import urlparse
 
 import yaml
 
-from jackai.models.config import TargetConfig
-from jackai.models.scanner import IdentifiedInteraction
+from jackai.core.models.config import TargetConfig
+from jackai.core.models.scanner import IdentifiedInteraction
 
 
 def _safe_filename(url: str, widget_type: str, suffix: str = "") -> str:
@@ -50,17 +50,19 @@ def save_target_config(
     filename: str | None = None,
 ) -> str:
     """
-    Save TargetConfig to config/targets/ (or config_dir). Returns path written.
+    Save TargetConfig to the domain store (TinyDB). Optionally export to YAML if config_dir given.
+    Returns identifier (target name) or path if YAML exported.
     """
-    if config_dir is None:
-        config_dir = Path("config") / "targets"
-    else:
+    from jackai.infrastructure.tinydb_repositories import get_target_repository
+    get_target_repository().save(config)
+    if config_dir is not None:
         config_dir = Path(config_dir)
-    config_dir.mkdir(parents=True, exist_ok=True)
-    if filename is None:
-        filename = _safe_filename(config.url or "", config.widget_type or "generic", ".yaml")
-    path = config_dir / filename
-    data = config.model_dump(mode="json")
-    with open(path, "w") as f:
-        yaml.dump(data, f, default_flow_style=False, sort_keys=False)
-    return str(path)
+        config_dir.mkdir(parents=True, exist_ok=True)
+        if filename is None:
+            filename = _safe_filename(config.url or "", config.widget_type or "generic", ".yaml")
+        path = config_dir / filename
+        data = config.model_dump(mode="json")
+        with open(path, "w") as f:
+            yaml.dump(data, f, default_flow_style=False, sort_keys=False)
+        return str(path)
+    return config.name

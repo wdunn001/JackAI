@@ -1,12 +1,12 @@
-"""Tests for jackai.adapters.web_widget (with mocked Playwright)."""
+"""Tests for jackai.core.adapters.web_widget (with mocked Playwright)."""
 
 from unittest.mock import MagicMock, patch
 
 import pytest
 
-from jackai.adapters.web_widget import WebWidgetAdapter
-from jackai.models.config import TargetConfig, WebWidgetSelectors
-from jackai.models.interface import ContextStrategy, SendRequest
+from jackai.core.adapters.web_widget import WebWidgetAdapter
+from jackai.core.models.config import TargetConfig, WebWidgetSelectors
+from jackai.core.models.interface import ContextStrategy, SendRequest
 
 
 @pytest.fixture
@@ -27,21 +27,21 @@ class TestWebWidgetAdapterValidation:
     def test_connect_requires_web_widget_type(self, web_widget_config: TargetConfig) -> None:
         adapter = WebWidgetAdapter()
         web_widget_config.adapter_type = "telegram"  # type: ignore
-        with patch("jackai.adapters.web_widget.PLAYWRIGHT_AVAILABLE", True):
+        with patch("jackai.core.adapters.web_widget.PLAYWRIGHT_AVAILABLE", True):
             with pytest.raises(ValueError, match="adapter_type=web_widget"):
                 adapter.connect(web_widget_config)
 
     def test_connect_requires_url(self, web_widget_config: TargetConfig) -> None:
         adapter = WebWidgetAdapter()
         web_widget_config.url = None
-        with patch("jackai.adapters.web_widget.PLAYWRIGHT_AVAILABLE", True):
+        with patch("jackai.core.adapters.web_widget.PLAYWRIGHT_AVAILABLE", True):
             with pytest.raises(ValueError, match="url"):
                 adapter.connect(web_widget_config)
 
     def test_connect_requires_selectors(self, web_widget_config: TargetConfig) -> None:
         adapter = WebWidgetAdapter()
         web_widget_config.selectors = None
-        with patch("jackai.adapters.web_widget.PLAYWRIGHT_AVAILABLE", True):
+        with patch("jackai.core.adapters.web_widget.PLAYWRIGHT_AVAILABLE", True):
             with pytest.raises(ValueError, match="selectors"):
                 adapter.connect(web_widget_config)
 
@@ -50,7 +50,7 @@ class TestWebWidgetAdapterValidation:
         web_widget_config: TargetConfig,
     ) -> None:
         adapter = WebWidgetAdapter()
-        with patch("jackai.adapters.web_widget.PLAYWRIGHT_AVAILABLE", False):
+        with patch("jackai.core.adapters.web_widget.PLAYWRIGHT_AVAILABLE", False):
             with pytest.raises(RuntimeError, match="Playwright not installed"):
                 adapter.connect(web_widget_config)
 
@@ -100,8 +100,8 @@ class TestWebWidgetAdapterWithMocks:
         web_widget_config: TargetConfig,
         mock_playwright_chain: MagicMock,
     ) -> None:
-        with patch("jackai.adapters.web_widget.PLAYWRIGHT_AVAILABLE", True):
-            with patch("jackai.adapters.web_widget.sync_playwright", mock_playwright_chain):
+        with patch("jackai.core.adapters.web_widget.PLAYWRIGHT_AVAILABLE", True):
+            with patch("jackai.core.adapters.web_widget.sync_playwright", mock_playwright_chain):
                 adapter = WebWidgetAdapter()
                 adapter.connect(web_widget_config)
                 assert adapter.is_connected() is True
@@ -115,8 +115,8 @@ class TestWebWidgetAdapterWithMocks:
         web_widget_config: TargetConfig,
         mock_playwright_chain: MagicMock,
     ) -> None:
-        with patch("jackai.adapters.web_widget.PLAYWRIGHT_AVAILABLE", True):
-            with patch("jackai.adapters.web_widget.sync_playwright", mock_playwright_chain):
+        with patch("jackai.core.adapters.web_widget.PLAYWRIGHT_AVAILABLE", True):
+            with patch("jackai.core.adapters.web_widget.sync_playwright", mock_playwright_chain):
                 adapter = WebWidgetAdapter()
                 adapter.connect(web_widget_config)
                 reply = adapter.send(SendRequest(content="Hello"))
@@ -134,8 +134,8 @@ class TestWebWidgetAdapterWithMocks:
         web_widget_config: TargetConfig,
         mock_playwright_chain: MagicMock,
     ) -> None:
-        with patch("jackai.adapters.web_widget.PLAYWRIGHT_AVAILABLE", True):
-            with patch("jackai.adapters.web_widget.sync_playwright", mock_playwright_chain):
+        with patch("jackai.core.adapters.web_widget.PLAYWRIGHT_AVAILABLE", True):
+            with patch("jackai.core.adapters.web_widget.sync_playwright", mock_playwright_chain):
                 adapter = WebWidgetAdapter()
                 adapter.connect(web_widget_config)
                 adapter.clear_context(ContextStrategy(strategy="new_session"))
@@ -148,8 +148,8 @@ class TestWebWidgetAdapterWithMocks:
         web_widget_config: TargetConfig,
         mock_playwright_chain: MagicMock,
     ) -> None:
-        with patch("jackai.adapters.web_widget.PLAYWRIGHT_AVAILABLE", True):
-            with patch("jackai.adapters.web_widget.sync_playwright", mock_playwright_chain):
+        with patch("jackai.core.adapters.web_widget.PLAYWRIGHT_AVAILABLE", True):
+            with patch("jackai.core.adapters.web_widget.sync_playwright", mock_playwright_chain):
                 adapter = WebWidgetAdapter()
                 adapter.connect(web_widget_config)
                 adapter.clear_context(
@@ -163,8 +163,8 @@ class TestWebWidgetAdapterWithMocks:
             adapter.set_context("x")
 
     def test_disconnect_idempotent(self, web_widget_config: TargetConfig) -> None:
-        with patch("jackai.adapters.web_widget.PLAYWRIGHT_AVAILABLE", True):
-            with patch("jackai.adapters.web_widget.sync_playwright") as mock_sync:
+        with patch("jackai.core.adapters.web_widget.PLAYWRIGHT_AVAILABLE", True):
+            with patch("jackai.core.adapters.web_widget.sync_playwright") as mock_sync:
                 mock_pw = MagicMock()
                 mock_browser = MagicMock()
                 mock_context = MagicMock()

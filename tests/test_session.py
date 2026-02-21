@@ -2,11 +2,11 @@
 
 import pytest
 
-from jackai.models.config import TargetConfig
-from jackai.models.interface import ContextStrategy, Reply, SendRequest
-from jackai.session import SessionManager
+from jackai.core.models.config import TargetConfig
+from jackai.core.models.interface import ContextStrategy, Reply, SendRequest
+from jackai.core.session import SessionManager
 
-from jackai.adapters.base import ChannelAdapterBase
+from jackai.core.adapters.base import ChannelAdapterBase
 
 
 class MockAdapter(ChannelAdapterBase):

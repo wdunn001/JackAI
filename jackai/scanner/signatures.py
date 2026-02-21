@@ -2,7 +2,7 @@
 
 from pydantic import BaseModel, Field
 
-from jackai.models.config import WebWidgetSelectors
+from jackai.core.models.config import WebWidgetSelectors
 
 
 class WidgetSignature(BaseModel):
@@ -87,6 +87,18 @@ KNOWN_WIDGET_SIGNATURES: list[WidgetSignature] = [
         ),
         script_selector="script[src*='hubspot']",
         iframe_selector="iframe[id*='hubspot']",
+    ),
+    # Genesys Cloud / CXUI (e.g. H&M customer service chat); iframe loads dynamically
+    WidgetSignature(
+        provider="genesys",
+        selectors=WebWidgetSelectors(
+            input_selector="#CXUI_inputField, [id*='CXUI_inputField' i], [id*='inputField' i], [contenteditable='true']",
+            message_list_selector="[id*='CXUI_container' i], [id*='CXUI' i], [class*='message' i], [class*='thread' i], [role='log']",
+            send_selector="button[type='submit'], [aria-label*='send' i], [class*='send' i]",
+            widget_container_selector="[id*='CXUI_container' i], [id*='CXUI' i], [id*='genesys' i]",
+        ),
+        script_selector=None,
+        iframe_selector="iframe#genesys-mxg-container-frame, iframe[id*='genesys' i]",
     ),
 ]
 

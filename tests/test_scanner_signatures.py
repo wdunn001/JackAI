@@ -2,7 +2,7 @@
 
 import pytest
 
-from jackai.models.config import WebWidgetSelectors
+from jackai.core.models.config import WebWidgetSelectors
 from jackai.scanner.signatures import (
     WidgetSignature,
     get_signatures,

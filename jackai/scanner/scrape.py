@@ -5,7 +5,7 @@ from urllib.parse import urljoin, urlparse
 
 import httpx
 
-from jackai.models.scanner import ScrapeInput, ScrapeResult
+from jackai.core.models.scanner import ScrapeInput, ScrapeResult
 
 
 def _same_origin(base_url: str, link: str) -> bool:

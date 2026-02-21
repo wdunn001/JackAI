@@ -1,10 +1,10 @@
 """Test context wipe: set context -> wipe (new_session or inject) -> probe; return ContextWipeTestResult."""
 
-from jackai.adapters.web_widget import WebWidgetAdapter
-from jackai.context import get_injection_payloads
-from jackai.models.config import TargetConfig
-from jackai.models.interface import ContextStrategy, SendRequest
-from jackai.models.scanner import ContextWipeTestResult, IdentifiedInteraction
+from jackai.core.adapters.web_widget import WebWidgetAdapter
+from jackai.core.context import get_injection_payloads
+from jackai.core.models.config import TargetConfig
+from jackai.core.models.interface import ContextStrategy, SendRequest
+from jackai.core.models.scanner import ContextWipeTestResult, IdentifiedInteraction
 from jackai.scanner.adapter_factory import build_target_config_from_result
 
 # Probe messages for context-wipe test

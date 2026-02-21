@@ -4,9 +4,9 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from jackai.models.config import TargetConfig, WebWidgetSelectors
-from jackai.models.interface import Reply, SendRequest
-from jackai.models.scanner import ContextWipeTestResult, IdentifiedInteraction
+from jackai.core.models.config import TargetConfig, WebWidgetSelectors
+from jackai.core.models.interface import Reply, SendRequest
+from jackai.core.models.scanner import ContextWipeTestResult, IdentifiedInteraction
 from jackai.scanner.test_context_wipe import (
     CONTEXT_SET_MESSAGE,
     PROBE_MESSAGE,

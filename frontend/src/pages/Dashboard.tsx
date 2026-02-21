@@ -51,6 +51,7 @@ export function Dashboard() {
       <p className="subtitle">Channel overview — connect and manage targets.</p>
       <nav>
         <Link to="/chat">Open Chat</Link>
+        <Link to="/scan">Scanner</Link>
       </nav>
       <section className="channel-overview">
         <h2>Channels</h2>

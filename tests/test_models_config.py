@@ -3,7 +3,7 @@
 import pytest
 from pydantic import ValidationError
 
-from jackai.models.config import TargetConfig, WebWidgetSelectors, WebWidgetTargetConfig
+from jackai.core.models.config import TargetConfig, WebWidgetSelectors, WebWidgetTargetConfig
 
 
 class TestWebWidgetSelectors:

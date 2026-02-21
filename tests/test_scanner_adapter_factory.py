@@ -3,8 +3,8 @@
 import pytest
 from pathlib import Path
 
-from jackai.models.config import TargetConfig, WebWidgetSelectors
-from jackai.models.scanner import IdentifiedInteraction
+from jackai.core.models.config import TargetConfig, WebWidgetSelectors
+from jackai.core.models.scanner import IdentifiedInteraction
 from jackai.scanner.adapter_factory import (
     build_target_config_from_result,
     save_target_config,
